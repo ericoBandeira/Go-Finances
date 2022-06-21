@@ -19,7 +19,7 @@ interface Category {
 }
 
 interface Props {
-    category: string;
+    category: Category;
     setCategory: (category: Category) => void;
     closeSelectCategory: () => void;
 }
@@ -42,7 +42,7 @@ export function CategorySelectPage({
                 style={{ flex: 1, width: '100%' }}
                 keyExtractor={(item)=> item.key}
                 renderItem={({ item }) => (
-                    <Category>
+                    <Category onPress={() => setCategory(item)} isActive={category.key === item.key}>
                         <Icon name={item.icon} />
                         <Name>
                             {item.name}
@@ -52,7 +52,7 @@ export function CategorySelectPage({
                 ItemSeparatorComponent={()=> <Separator/>}
             />
             <Footer>
-                <Button title="Cadastrar"/>
+                <Button title="Selecionar" onPress={closeSelectCategory}/>
             </Footer>
         </Container>
     );

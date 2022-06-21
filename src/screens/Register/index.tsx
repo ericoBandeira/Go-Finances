@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Modal } from "react-native";
 import { Button } from "../../components/Forms/Button";
 import { CategorySelect } from "../../components/Forms/CategorySelect";
 import { Input } from "../../components/Forms/Input";
 import { TransactionTypeButton } from "../../components/Forms/TransactionTypeButton";
+import { CategorySelectPage } from "../CategorySelectPage";
 
 import {
     Container,
@@ -15,10 +17,24 @@ import {
 
 export function Register() {
 
+    const [category, setCategory] = useState({
+        key: 'category',
+        name: 'Categoria'
+    })
+
     const [selected, setSelected] = useState('')
+    const [categoryModalOpen, setCategoryModalOpen] = useState(false)
 
     function handleSelected(type: 'up' | 'down') {
         setSelected(type);
+    }
+
+    function handleOpenModal() {
+        setCategoryModalOpen(true);
+    }
+
+    function handleCloseModal() {
+        setCategoryModalOpen(false);
     }
 
     return (
@@ -55,11 +71,19 @@ export function Register() {
                         />
                     </TransactionTypes>
 
-                    <CategorySelect title="Categoria" />
+                    <CategorySelect title={category.name} onPress={handleOpenModal}/>
                 </Fields>
 
                 <Button title="Enviar"/>
             </Form>
+
+            <Modal visible={categoryModalOpen}>
+                <CategorySelectPage
+                    category={category}
+                    setCategory={setCategory}
+                    closeSelectCategory={handleCloseModal}
+                />
+            </Modal>
         </Container>
     );
 }

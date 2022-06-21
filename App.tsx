@@ -10,7 +10,7 @@ import {
 } from '@expo-google-fonts/poppins'
 
 import theme from './src/global/styles/theme'
-import { CategorySelectPage } from './src/screens/CategorySelectPage';
+import { Register } from './src/screens/Register';
 
 export default function App() {
 
@@ -26,9 +26,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme} >
-      <CategorySelectPage />
-    </ThemeProvider>
-    
+      <Register />
+    </ThemeProvider>  
   );
 }
 
